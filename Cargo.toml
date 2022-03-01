@@ -1,0 +1,8 @@
+[package]
+name = "stash"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+reedline = { git = "https://github.com/nushell/reedline", branch = "main" }
