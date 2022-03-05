@@ -3,7 +3,9 @@ use std::str::FromStr;
 use anyhow::anyhow;
 
 pub enum Command {
+    Write(String, String),
     Exit,
+    Debug,
     None,
 }
 
@@ -21,6 +23,12 @@ impl FromStr for Command {
 
         match cmd {
             "exit" => Ok(Self::Exit),
+            "dbg" => Ok(Self::Debug),
+            "write" | "store" => {
+                let k = s.next().ok_or(anyhow!("Missing key, value"))?.to_string();
+                let v = s.next().ok_or(anyhow!("Missing value"))?.to_string();
+                Ok(Self::Write(k, v))
+            }
             _ => Err(anyhow!(format!("Unkown command `{}`", cmd))),
         }
     }
