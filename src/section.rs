@@ -8,17 +8,14 @@ impl Section {
         Self { key: k, value: v }
     }
 
-    pub fn serialise(&self) -> String {
-        let mut result = String::with_capacity(self.key.len() + self.value.len() + 10);
+    pub fn serialise(&self) -> Vec<u8> {
+        let mut result = Vec::with_capacity(self.key.len() + self.value.len() + 10);
 
-        result.push_str(&self.key.len().to_string());
-        result.push('|');
-        result.push_str(&self.value.len().to_string());
-        result.push('|');
-        result.push_str(&self.key);
-        result.push('|');
-        result.push_str(&self.value);
-        result.push('|');
+        // FIXME: Casting to u8 is not very safe and won't work with key/values larger than 255 chars
+        result.extend_from_slice(&(self.key.len() as u8).to_be_bytes());
+        result.extend_from_slice(self.key.as_bytes());
+        result.extend_from_slice(&(self.value.len() as u8).to_be_bytes());
+        result.extend_from_slice(self.value.as_bytes());
 
         result
     }
