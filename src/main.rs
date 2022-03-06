@@ -67,6 +67,9 @@ fn handle_line(storage: &mut Storage, msg: &str) -> Result<()> {
             let section = Section::new(key, value);
             storage.write(section)?;
         }
+        Command::Dump => {
+            storage.dump()?;
+        }
         Command::None => {}
     }
 
