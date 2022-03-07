@@ -9,4 +9,5 @@ path = "src/main.rs"
 
 [dependencies]
 anyhow = "1"
+thiserror = "1"
 reedline = { git = "https://github.com/nushell/reedline", branch = "main" }

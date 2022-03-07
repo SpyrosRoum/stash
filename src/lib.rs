@@ -1,3 +1,4 @@
+mod error;
 mod section;
 mod storage;
 

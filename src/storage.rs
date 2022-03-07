@@ -3,9 +3,7 @@ use std::{
     io::{Read, Seek, SeekFrom, Write},
 };
 
-use anyhow::Result;
-
-use crate::section::Section;
+use crate::{error::StashResult, section::Section};
 
 #[derive(Debug)]
 pub struct Storage {
@@ -17,7 +15,7 @@ impl Storage {
         Self { file }
     }
 
-    pub fn dump(&mut self) -> Result<()> {
+    pub fn dump(&mut self) -> StashResult<()> {
         self.file.rewind()?;
 
         let mut looking_for_key = true;
@@ -46,7 +44,7 @@ impl Storage {
         Ok(())
     }
 
-    pub fn write(&mut self, section: Section) -> Result<()> {
+    pub fn write(&mut self, section: Section) -> StashResult<()> {
         // We want to append to the file so move the cursor to the end
         self.file.seek(SeekFrom::End(0))?;
 
