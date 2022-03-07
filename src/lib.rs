@@ -1,5 +1,3 @@
-pub mod command;
-pub mod custom_prompt;
 mod section;
 mod storage;
 
