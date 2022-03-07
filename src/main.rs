@@ -1,19 +1,11 @@
-mod command;
-mod custom_prompt;
-mod section;
-mod storage;
-
 use std::{env, fs::OpenOptions, process::exit, str::FromStr};
-
-use section::Section;
-use storage::Storage;
 
 use {
     anyhow::{Context, Result},
     reedline::{Reedline, Signal},
 };
 
-use {command::Command, custom_prompt::CustomPrompt};
+use stash::{command::Command, custom_prompt::CustomPrompt, Section, Storage};
 
 const EXIT_MSG: &str = "Byee";
 
