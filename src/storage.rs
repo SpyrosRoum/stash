@@ -50,7 +50,7 @@ impl Storage {
         // We want to append to the file so move the cursor to the end
         self.file.seek(SeekFrom::End(0))?;
 
-        let section = section.serialise();
+        let section = section.serialise()?;
         self.file.write_all(&section)?;
 
         Ok(())
